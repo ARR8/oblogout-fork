@@ -45,6 +45,8 @@ def main(argv = None):
     verbose = None
     config = None
     local_mode = None
+    config_name = 'oblogout.conf'
+    home_path = os.environ['HOME']
     
     if argv is None:
         argv = sys.argv
@@ -67,21 +69,25 @@ def main(argv = None):
         elif o in ("-v", "--verbose"):
             verbose = True
         elif o in ("-c", "--config"):
-            config = a
+            config = a if os.path.exists(a) else None
         elif o in ("-l", "--local"):
             local_mode = True
 
     if not config:
-        if not local_mode:
-            config = '/etc/oblogout.conf'
+        # local data
+        if local_mode and os.path.exists("data/%s" % config_name):
+            config = 'data/' + config_name
+        # check if config exist in home 
+        elif os.path.exists("%s/.config/oblogout/%s" % (home_path, config_name)):
+            config = home_path + '/.config/oblogout/' + config_name
+        # check if config exist in etc
+        elif os.path.exists("/etc/%s" % config_name):
+            config = '/etc/' + config_name
+        # config not found
         else:
-            config = 'data/oblogout.conf'
+            logger.error("Invalid config file: %s" % config)
+            return 1
                 
-    # Check config in local path, if it exists pass it on     
-    if not os.path.exists(config):
-        logger.error("Invalid config file: %s" % config)
-        return 1
-
     # If debug mode is enabled, output debug messages
     if verbose:
         logger.setLevel(logging.DEBUG)

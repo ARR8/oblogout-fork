@@ -27,7 +27,7 @@
  INSTALLATION
 
  - Run ./setup.py install
- - Customise the config (/etc/oblogout.conf) as required
+ - Customise the config as required
 
 ######
 
@@ -41,6 +41,10 @@
 ######
 
  CONFIGURATION OPTIONS
+    A default configuration file is located at '/etc/oblogout.config'
+    on start 'oblogout' looks for a config file in '~/.config/oblogout/oblogout.conf' 
+    but you can pass a specific path via the 'oblogout --config' option.
+    if no configuration file is found 'oblogout' will use the default configurartion 
 
  SETTINGS
 
