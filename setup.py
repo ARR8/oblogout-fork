@@ -9,13 +9,13 @@ try:
     import distutils.command.install_data
     from distutils.core import setup
 except:
-    print "DistUtils / SetupTools are required"
+    print("DistUtils / SetupTools are required")
     sys.exit(1)
 
 try:
     from DistUtilsExtra.command import *
 except:
-    print "DistUtils Extras is required"
+    print("DistUtils Extras is required")
     sys.exit(1)
 
 setup(name = "oblogout",

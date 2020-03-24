@@ -54,17 +54,17 @@ def main(argv = None):
     try:
         try:
             opts, args = getopt.getopt(argv[1:], "hvc:l", ["help", "verbose", "config=", "local"])
-        except getopt.error, msg:
+        except getopt.error as msg:
              raise Usage(msg)
         # more code, unchanged
-    except Usage, err:
+    except Usage as err:
         logger.error(err.msg)
         logger.error("for help use --help")
         return 2
 
     for o, a in opts:
         if o in ("-h", "--help"):
-            print __doc__
+            print(__doc__)
             return 0
         elif o in ("-v", "--verbose"):
             verbose = True

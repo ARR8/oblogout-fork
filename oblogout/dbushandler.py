@@ -139,16 +139,16 @@ class DbusController (object):
          try:
             self._sysbus.get_object ("org.freedesktop.Hal", "/org/freedesktop/Hal/devices/computer")
             return True
-         except dbus.DBusException, ex:
-            print "No .service files for HAL, fallbacking to none"
+         except dbus.DBusException as ex:
+            print("No .service files for HAL, fallbacking to none")
             return False
        elif self.backend == "ConsoleKit":
          try:
             self._sysbus.get_object ("org.freedesktop.ConsoleKit", "/org/freedesktop/ConsoleKit/Manager")
             self._sysbus.get_object ("org.freedesktop.UPower", "/org/freedesktop/UPower")
             return True
-         except dbus.DBusException, ex:
-            print "No .service files for ConsoleKit or UPower, fallbacking to none"
+         except dbus.DBusException as ex:
+            print("No .service files for ConsoleKit or UPower, fallbacking to none")
             return False
 
        return False
@@ -242,7 +242,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
 
     t = DbusController()
-    print t.restart()
+    print(t.restart())
 
 
 
